@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylobikes - Loja de Bicicletas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animações personalizadas */
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .bike-image {
+            transition: opacity 0.5s ease-in-out, transform 0.3s ease;
+        }
+
+        .bike-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Efeito de scroll suave */
+        .scroll-effect {
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* Efeito de carregamento no botão */
+        .hover:scale-110:hover {
+            transform: scale(1.10);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+
+    <!-- Cabeçalho -->
+    <header class="bg-black text-white py-12 text-center shadow-xl fade-in">
+        <img src="logo.png" alt="Stylobikes Logo" class="mx-auto mb-5 w-40 md:w-48 transition transform hover:scale-110">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-wide">Bem-vindo à Stylobikes</h1>
+    </header>
+
+    <!-- Container principal -->
+    <div class="container mx-auto p-6">
+
+        <!-- Seção de Seleção de Bicicletas -->
+        <div class="flex justify-center space-x-6 mb-12 fade-in">
+            <button onclick="changeBike('modelo1')" class="bike-option px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition transform hover:scale-105 shadow-md">
+                Modelo 1
+            </button>
+            <button onclick="changeBike('modelo2')" class="bike-option px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition transform hover:scale-105 shadow-md">
+                Modelo 2
+            </button>
+            <button onclick="changeBike('modelo3')" class="bike-option px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition transform hover:scale-105 shadow-md">
+                Modelo 3
+            </button>
+        </div>
+
+        <!-- Exibição da Imagem da Bicicleta -->
+        <div class="text-center">
+            <img id="bike-image" src="bike-modelo1.jpg" alt="Imagem da bicicleta" class="bike-image max-w-full h-auto mx-auto rounded-lg shadow-xl transition-opacity duration-500 ease-in-out opacity-100">
+        </div>
+
+    </div>
+
+    <!-- Seção de Contato -->
+    <div class="contact-section bg-white p-12 mt-20 mx-auto max-w-4xl rounded-lg shadow-xl fade-in">
+        <h2 class="text-3xl font-semibold text-center mb-6 text-gray-800">Entre em Contato</h2>
+        <p class="text-center text-gray-600 mb-10">Tem alguma dúvida? Preencha o formulário abaixo e nossa equipe entrará em contato com você!</p>
+        <form action="enviar_contato.php" method="post" class="space-y-6">
+            <input type="text" name="nome" placeholder="Seu Nome" required class="w-full p-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+            <input type="email" name="email" placeholder="Seu E-mail" required class="w-full p-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+            <textarea name="mensagem" rows="5" placeholder="Sua Mensagem" required class="w-full p-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"></textarea>
+            <button type="submit" class="w-full py-4 text-lg text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition transform hover:scale-110">
+                Enviar Mensagem
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Função para trocar a imagem da bicicleta com base no modelo selecionado
+        function changeBike(modelo) {
+            let bikeImage = document.getElementById('bike-image');
+            let imageUrl = '';
+
+            if (modelo === 'modelo1') {
+                imageUrl = 'hero01.png';
+            } else if (modelo === 'modelo2') {
+                imageUrl = 'hero02.png';
+            } else if (modelo === 'modelo3') {
+                imageUrl = 'hero03.png';
+            }
+
+            // Animação de transição suave na troca de imagem
+            bikeImage.style.opacity = 0;
+            setTimeout(function() {
+                bikeImage.src = imageUrl;
+                bikeImage.style.opacity = 1;
+            }, 500);
+        }
+
+        // Efeito de animação na rolagem da página
+        const elements = document.querySelectorAll('.scroll-effect');
+        window.addEventListener('scroll', () => {
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                if (position.top < window.innerHeight) {
+                    element.classList.add('fade-in');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
